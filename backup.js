@@ -26,7 +26,7 @@ async function makeReq(endpoint, body="") {
     const document = bodyRes.data
     return document
   } else {
-    console.error(endpoint, body, res, await res.json())
+    console.error(endpoint, body, res, await res.text())
     process.exit(1)
   }
 }
