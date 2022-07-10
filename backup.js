@@ -5,6 +5,7 @@ import fetch from 'node-fetch';
 
 const baseUrl = process.env.OUTLINE_URL
 const apiToken = process.env.OUTLINE_API_KEY
+const userAgent = process.env.BACKUP_UA || 'BackupScript/1.0'
 
 const streamPipeline = promisify(pipeline);
 
@@ -14,7 +15,8 @@ async function makeReq(endpoint, body="") {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiToken}`
+      Authorization: `Bearer ${apiToken}`,
+      'User-Agent': userAgent
     },
   }
   if (body != "") {
@@ -56,7 +58,8 @@ async function getBackup(id) {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiToken}`
+      Authorization: `Bearer ${apiToken}`,
+      'User-Agent': userAgent
     },
     body: JSON.stringify({id: id})
   })
